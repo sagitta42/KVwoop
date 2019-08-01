@@ -17,3 +17,18 @@ python plot_stuff.py songs save
 ```
 
 Option "songs" works only for ```woop_vs_time``` and will display the beginnings of tracks as vertical lines. Option "save" works for both plotting methods, and will save the plot as png instead of displaying it
+
+## Files
+
+Code:
+```kvwoop.py```: main class for managing woops
+```myplot.py```: my pretty plotting class from [here](https://github.com/sagitta42/myplot.git)
+```plot_stuff.py```: main script to plot
+
+Information tables:
+```kvwoop.csv```: woop information 
+```kvalbum.csv```: general album information (track length)
+
+	new file:   myplot.py
+	new file:   plot_stuff.py
+

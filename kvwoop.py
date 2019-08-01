@@ -70,9 +70,6 @@ class KVwoop(pd.DataFrame):
         if songs:
             col = 0
             for i in range(1, len(self.info)+1):
-                print i
-                # print self.info.loc[i]['StartTime']
-                # p.ax.axvline(self.info.loc[i]['StartTime'], label='test', linestyle='--', color=COLORS[col])
                 p.ax.axvline(self.info.loc[i]['StartTime'], label='(' + str(i) + ') ' + self.info.loc[i]['SongName'], linestyle='--', color=COLORS[col % len(COLORS)])
                 col+=1
 
@@ -83,6 +80,7 @@ class KVwoop(pd.DataFrame):
         plt.ylabel('Cumulative number of woops')
         plt.xlabel('Total time')
         p.fig.autofmt_xdate()
+        plt.ylim(0, self['NumWoops'].max() + 1) # the last label doesn't fit, increase the plot limit
         p.pretty(large=0)
 
         if save:
