@@ -53,7 +53,7 @@ class KVwoop(pd.DataFrame):
         for i in range(len(self)):
             # the first variables are: text, (x, y), xy being the coordinates of the point (not the text)
             # text coords: what is given in xytext (offset relative to point coords)
-            p.ax.annotate(self.loc[i]['WoopType'], (self.loc[i]['TotalTimeX'], self.loc[i]['NumWoops']), fontsize=15, textcoords='offset points', xytext =(-15, 7))#, transform=p.ax.transAxes, fontsize=17)
+            p.ax.annotate(self.loc[i]['WoopType'], (self.loc[i]['TotalTimeX'], self.loc[i]['NumWoops']), fontsize=15, textcoords='offset points', xytext =(+10, -5))
 
         ## vertical lines for songs
         # the start of the song is the length of the previous songs (and 0 for the first one)
