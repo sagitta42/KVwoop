@@ -24,7 +24,7 @@ class KVwoop(pd.DataFrame):
         # self.info = self.info.set_index('SongName', drop=False)
 
 
-    def woop_vs_time(self, songs=False, save=False):
+    def woop_vs_time(self, imgname, songs=False):
         '''
         Woop evolution in time. Y axis - cumulative number of woops. Each woop has a label denoting woop type
         Variable songs (True|False) determines whether the track beginnings are marked as vertical dashed lines
@@ -46,13 +46,15 @@ class KVwoop(pd.DataFrame):
         # well but now we don't want the date info, only time:
         self['TotalTimeX'] = self['TotalTime'].dt.time
 
-        p = Plot((12,8)) # this is just my pretty plotting framework
+        p = Plot((12,12)) # this is just my pretty plotting framework
         self.plot(x = 'TotalTimeX', y = 'NumWoops', style = '.', ax = p.ax, legend=False, markersize=10, label='_nolabel_', color='k')
 
         ## annotate
         for i in range(len(self)):
             # the first variables are: text, (x, y), xy being the coordinates of the point (not the text)
             # text coords: what is given in xytext (offset relative to point coords)
+            # xytext =(+10, -5) -> to the right
+            # xytext =(-15, +5) -> above
             p.ax.annotate(self.loc[i]['WoopType'], (self.loc[i]['TotalTimeX'], self.loc[i]['NumWoops']), fontsize=15, textcoords='offset points', xytext =(+10, -5))
 
         ## vertical lines for songs
@@ -64,7 +66,7 @@ class KVwoop(pd.DataFrame):
         # again, we don't want the full date, only the time on the x axis
         self.info['StartTime'] = self.info['StartTime'].dt.time
 
-        imgname = 'woop_vs_time'
+        # imgname = 'woop_vs_time'
 
         ## plot track beginnings as vertical lines
         if songs:
@@ -81,17 +83,13 @@ class KVwoop(pd.DataFrame):
         plt.xlabel('Total time')
         p.fig.autofmt_xdate()
         plt.ylim(0, self['NumWoops'].max() + 1) # the last label doesn't fit, increase the plot limit
-        p.pretty(large=0)
-
-        if save:
-            plt.savefig(imgname + '.png')
-        else:
-            plt.show()
+        p.pretty(stretch='float', large=2)
+        p.figure(imgname + '.png')
 
 
 
 
-    def woop_per_song(self, save):
+    def woop_per_song(self, imgname):
         ''' Bar chart of number of woops per song in decreasing order '''
 
         toplot = self.groupby('SongName').size()
@@ -101,12 +99,10 @@ class KVwoop(pd.DataFrame):
         toplot.plot.bar()
         plt.xlabel('Song')
         plt.ylabel('Number of woops')
+        p.fig.autofmt_xdate()
         p.pretty()
 
-        if save:
-            plt.savefig('woop_per_song.png')
-        else:
-            plt.show()
+        p.figure(imgname + '.png')
 
 
 

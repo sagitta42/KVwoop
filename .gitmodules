@@ -1,0 +1,3 @@
+[submodule "myplot"]
+	path = myplot
+	url = https://github.com/sagitta42/myplot.git
