@@ -46,7 +46,8 @@ class KVwoop(pd.DataFrame):
         # well but now we don't want the date info, only time:
         self['TotalTimeX'] = self['TotalTime'].dt.time
 
-        p = Plot((12,12)) # this is just my pretty plotting framework
+        figsize = (12,12) if songs else (12,8)
+        p = Plot(figsize) # this is just my pretty plotting framework
         self.plot(x = 'TotalTimeX', y = 'NumWoops', style = '.', ax = p.ax, legend=False, markersize=10, label='_nolabel_', color='k')
 
         ## annotate
@@ -83,7 +84,7 @@ class KVwoop(pd.DataFrame):
         plt.xlabel('Total time')
         p.fig.autofmt_xdate()
         plt.ylim(0, self['NumWoops'].max() + 1) # the last label doesn't fit, increase the plot limit
-        p.pretty(stretch='float', large=2)
+        p.pretty(stretch=0.9, large=2)
         p.figure(imgname + '.png')
 
 

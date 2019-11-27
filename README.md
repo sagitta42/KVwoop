@@ -1,5 +1,15 @@
 # KV Woops analyzer
 
+To set up
+
+```console
+git clone https://github.com/sagitta42/KVwoop.git
+git submodule init
+git submodule update
+```
+
+## Functions
+
 Two methods are available:
 
 ```woop_vs_time```: plot number of woops VS time
@@ -28,7 +38,3 @@ Code:
 Information tables:
 ```kvwoop.csv```: woop information 
 ```kvalbum.csv```: general album information (track length)
-
-	new file:   myplot.py
-	new file:   plot_stuff.py
-
